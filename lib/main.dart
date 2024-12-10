@@ -25,6 +25,9 @@ class DicePage extends StatelessWidget {
             height: 150.0,
             width: 150.0,
             child: TextButton(
+              style: TextButton.styleFrom(
+                foregroundColor: Colors.green.shade900
+              ),
               onPressed: () {},
               child: Image.asset('images/dice-one.png'),
             ),
