@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'dart:math';
 void main() {
   runApp(MaterialApp(
     home: Scaffold(
@@ -35,9 +35,12 @@ class _DicePageState extends State<DicePage> {
                 foregroundColor: Colors.green.shade900
               ),
               onPressed: () {
-                print('Button Pressed');
-                DiceNumber++;
-                print('Dice number = $DiceNumber');
+                setState(() {
+                  // print('Button Pressed');
+                  DiceNumber = Random().nextInt(6)+1;
+                // print('Dice number = $DiceNumber');
+                });
+                
 
               },
               child: Image.asset('images/dice-$DiceNumber.png'),
