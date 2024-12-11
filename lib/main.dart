@@ -12,8 +12,14 @@ void main() {
   ));
 }
 
-class DicePage extends StatelessWidget {
-   DicePage({super.key});
+class DicePage extends StatefulWidget {
+  const DicePage({super.key});
+
+  @override
+  State<DicePage> createState() => _DicePageState();
+}
+
+class _DicePageState extends State<DicePage> {
   var DiceNumber = 1;
   @override
   Widget build(BuildContext context) {
@@ -30,6 +36,9 @@ class DicePage extends StatelessWidget {
               ),
               onPressed: () {
                 print('Button Pressed');
+                DiceNumber++;
+                print('Dice number = $DiceNumber');
+
               },
               child: Image.asset('images/dice-$DiceNumber.png'),
             ),
