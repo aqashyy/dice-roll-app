@@ -13,8 +13,8 @@ void main() {
 }
 
 class DicePage extends StatelessWidget {
-  const DicePage({super.key});
-
+   DicePage({super.key});
+  var DiceNumber = 1;
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -28,8 +28,10 @@ class DicePage extends StatelessWidget {
               style: TextButton.styleFrom(
                 foregroundColor: Colors.green.shade900
               ),
-              onPressed: () {},
-              child: Image.asset('images/dice-one.png'),
+              onPressed: () {
+                print('Button Pressed');
+              },
+              child: Image.asset('images/dice-$DiceNumber.png'),
             ),
           ),
         ],
