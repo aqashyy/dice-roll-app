@@ -28,7 +28,7 @@ class _DicePageState extends State<DicePage> {
   // AudioPlayer player = AudioPlayer();
   final player = AudioPlayer();
   int counter = 1;
-
+  double rotationAngle = 0;
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -44,7 +44,10 @@ class _DicePageState extends State<DicePage> {
               onPressed: () {
                 rollDice();
               },
-              child: Image.asset('assets/images/dice-$DiceNumber.png'),
+              child: Transform.rotate(
+                angle: rotationAngle,
+                child: Image.asset('assets/images/dice-$DiceNumber.png'),
+              ),
             ),
           ),
         ],
@@ -55,8 +58,10 @@ class _DicePageState extends State<DicePage> {
 // Function for rolling dice
   Future<void> rollDice() async {
     String audioPath = "sounds/dice_roll.mp3";
+
     Timer.periodic(const Duration(milliseconds: 80), (timer) {
       player.play(AssetSource(audioPath)); // for play sound
+      rotationAngle = Random().nextDouble() * 180;
       counter++;
       setState(() {
         // print('Button Pressed');
@@ -67,6 +72,7 @@ class _DicePageState extends State<DicePage> {
       if (counter >= 13) {
         timer.cancel();
         counter = 1;
+        rotationAngle = 0;
       }
     });
   }
