@@ -21,7 +21,7 @@ To get started with the Dice Roller App, follow these steps:
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/dice_roller_app.git
+   git clone https://github.com/aqashyy/dice_roller_app.git
    ```
 2. Navigate to the project directory:
    ```bash
