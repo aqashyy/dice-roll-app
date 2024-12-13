@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:audioplayers/audioplayers.dart';
+import 'dart:async';
 // import 'package:just_audio/just_audio.dart';
 import 'dart:math';
+
 void main() {
   runApp(MaterialApp(
     home: Scaffold(
@@ -25,6 +27,7 @@ class _DicePageState extends State<DicePage> {
   var DiceNumber = 1;
   // AudioPlayer player = AudioPlayer();
   final player = AudioPlayer();
+  int counter = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -36,17 +39,10 @@ class _DicePageState extends State<DicePage> {
             height: 150.0,
             width: 150.0,
             child: TextButton(
-              style: TextButton.styleFrom(
-                foregroundColor: Colors.blue.shade900
-              ),
+              style:
+                  TextButton.styleFrom(foregroundColor: Colors.blue.shade900),
               onPressed: () {
-                // player.play(AssetSource('sounds/dice_roll.mp3')); // Adjust filename as needed
-                setState(() {
-                  // print('Button Pressed');
-                  playSound();
-                  DiceNumber = Random().nextInt(6)+1;
-                // print('Dice number = $DiceNumber');
-                });
+                rollDice();
               },
               child: Image.asset('assets/images/dice-$DiceNumber.png'),
             ),
@@ -55,8 +51,23 @@ class _DicePageState extends State<DicePage> {
       ),
     );
   }
-  Future<void> playSound() async {
+
+// Function for rolling dice
+  Future<void> rollDice() async {
     String audioPath = "sounds/dice_roll.mp3";
-    player.play(AssetSource(audioPath));
+    Timer.periodic(const Duration(milliseconds: 80), (timer) {
+      player.play(AssetSource(audioPath)); // for play sound
+      counter++;
+      setState(() {
+        // print('Button Pressed');
+        DiceNumber = Random().nextInt(6) + 1;
+        // print('Dice number = $DiceNumber');
+      });
+      // statement for stop timer
+      if (counter >= 13) {
+        timer.cancel();
+        counter = 1;
+      }
+    });
   }
 }
